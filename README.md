@@ -14,7 +14,11 @@
 - max_len 512로 tokenize해서 두개의 문제를 cross-encording하는 기법을 사용하기로 함
 
 ### 5.24(화)
-- 첫 제출 (accuracy 0.92825)
+- 나현 첫 제출 (public accuracy 0.49929)
+> - 모델을 전혀 학습시키지 않고 바로 predicting
+> - 이 경우에는 결과가 별로 좋지 않았음
+> - 최소한의 학습은 있어야 할 것으로 보임
+- 승환 첫 제출 (public accuracy 0.92825)
 - 생각한 내용
 > - 학습환경은 2080 두개. batch size를 작게 쓸 수 밖에 없었음 (model이 너무 크다...)
 > - 그래서 hyperparameter가 max_len=512, train_batch=4, eval_batch_size=16, patience=2, eval_steps=500으로 설정됨
