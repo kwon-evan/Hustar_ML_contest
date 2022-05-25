@@ -1,17 +1,9 @@
 # Hustar_ML_contest
 ## 구성원 : 강나현, 권헌진, 김민호, 오승환
-### 05.02(월)
-- Git repository 생성
-- 프로젝트 목표 설정
-
-### 05.22(일)
-- 코드 유사성 판단 AI 경진대회 참가 (Link : https://dacon.io/competitions/official/235900/overview/description)
-- EDA 개시
-- graphCodeBert 사용하기로 결정
-
-### 05.23(월)
-- Tokenize에 시간이 상당히 소요됨
-- max_len 512로 tokenize해서 두개의 문제를 cross-encording하는 기법을 사용하기로 함
+### 5.25(수)
+- 추가 제출 (public accuracy 0.930006)
+- early_stopping_patience=5로 늘리고 적용시켰더니 점수가 조금 더 올랐음. 예상대로 기존의 방식은 학습이 너무 빨리 종료됨
+- patience를 20으로 해보고 학습 시켜볼 예정
 
 ### 5.24(화)
 - 나현 첫 제출 (public accuracy 0.49929)
@@ -28,3 +20,16 @@
 > - max_len을 512로 유지하되 dataset의 크기를 줄이고 batch_size를 키울 수 있다면 더 좋을것 같은데
 > - distillation, quantization, pruning, weight sharing 등 경량화 기법을 사용해서 모델 자체를 가볍게 하는게 좋을수도?
 > - early_stopping_patience=2는 너무 작긴함. 좀 더 키우고 학습시켜보자
+
+### 05.23(월)
+- Tokenize에 시간이 상당히 소요됨
+- max_len 512로 tokenize해서 두개의 문제를 cross-encording하는 기법을 사용하기로 함
+
+### 05.22(일)
+- 코드 유사성 판단 AI 경진대회 참가 (Link : https://dacon.io/competitions/official/235900/overview/description)
+- EDA 개시
+- graphCodeBert 사용하기로 결정
+
+### 05.02(월)
+- Git repository 생성
+- 프로젝트 목표 설정
