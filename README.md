@@ -1,9 +1,15 @@
 # Hustar_ML_contest
 ## 구성원 : 강나현, 권헌진, 김민호, 오승환
 ### 5.25(수)
-- 추가 제출 (public accuracy 0.930006)
-- early_stopping_patience=5로 늘리고 적용시켰더니 점수가 조금 더 올랐음. 예상대로 기존의 방식은 학습이 너무 빨리 종료됨
-- patience를 20으로 해보고 학습 시켜볼 예정
+- 승환 추가 제출 (public accuracy 0.930006)
+> - early_stopping_patience=5로 늘리고 적용시켰더니 점수가 조금 더 올랐음. 예상대로 기존의 방식은 학습이 너무 빨리 종료됨
+> - patience를 20으로 해보고 학습 시켜볼 예정
+- 민호 첫 제출 (public accuracy 0.89497)
+> - positive, negative pairs의 dataset 크기를 약 60만개로 줄임
+> - RoBertaForSequenceClassification 대신 AutoModelForSequenceClassification 사용
+> - MAX_LEN = 256, train_batch_size=32, eval_batch_size=32, early_stopping_patience = 5로 설정
+>   - MAX_LEN이 작아서 256 이상 코드에 대한 학습이 저조하여 score가 낮게 나온 것으로 예상
+>   - early_stopping_patience가 커지면 모델을 저장하는 크기도 그만큼 커져야 최적의 모델을 저장할 수 있을 듯
 
 ### 5.24(화)
 - 나현 첫 제출 (public accuracy 0.49929)
