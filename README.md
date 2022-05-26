@@ -1,5 +1,15 @@
 # Hustar_ML_contest
 ## 구성원 : 강나현, 권헌진, 김민호, 오승환
+### 5.26(목)
+- 추가 제출 (public accuracy 0.9467)
+> - Hyperparameter : lr=1e-5, patience=20
+>   - 학습 도중 step-checkpoint를 저장할 용량이 부족해서 학습이 강제 중단됨.
+>   - 그럼에도 불구하고 기존 제출물에 비해 눈에 띄게 정확도가 오름
+>   - 데이터가 매우 많고, 모델 깊이가 어마어마하기때문에 일단 학습을 오래시키는 것 만으로도 효과적인 성능 향상이 존재
+>   - 즉, 가능한 학습을 오래 시켜볼 필요성이 있음 (=overfitting의 발생 가능성이 다소 낮음)
+> - 일단 현재 저장된 checkpoint의 parameter에서 새로 구성된 dataset에 대한 실험을 하는것도 괜찮지 않을까 하는 생각이 생김
+>   - 모델 경량화 보류. 대신 마지막 classificationhead나 optimizer, loss 측정함수 등을 개선해 보는 쪽이 더 좋을 것 같음
+
 ### 5.25(수)
 - 승환 추가 제출 (public accuracy 0.930006)
 > - early_stopping_patience=5로 늘리고 적용시켰더니 점수가 조금 더 올랐음. 예상대로 기존의 방식은 학습이 너무 빨리 종료됨
