@@ -1,5 +1,13 @@
 # Hustar_ML_contest
 ## 구성원 : 강나현, 권헌진, 김민호, 오승환
+### 6.01(수)
+- 추가 제출 (public accuracy 0.929512)
+> - 다른 조건은 26일 제출과 같음. 모델만 codeberta small을 사용
+>   - graphcodebert의 parameter는 약 1.2억개. 그러나 codeberta small은 약 8천만개.
+>   - 그래서 학습속도만 두고 봤을 땐 약 2.3배 가량 빨랐음.
+>   - 하지만 어쩔 수 없는 parameter 갯수 차이 때문인지 public accuracy가 상당히 차이남(약 2%)
+>   - 즉, submission 용도로는 부적합. 그러나 test용도로는 빠른 학습덕에 써 볼만 해 보임
+
 ### 5.26(목)
 - 추가 제출 (public accuracy 0.9467)
 > - Hyperparameter : lr=1e-5, patience=20
