@@ -159,7 +159,7 @@ class TextDataset(Dataset):
         for idx, (code1, code2, similar) in csv_data.iterrows():
             code1 = code1.strip()
             code2 = code2.strip()
-            label = 0 if similar == '0' else 1
+            label = similar
             data.append((code1, code2, label, tokenizer, parser, code_length, data_flow_length, cache))
 
         # convert example to input features
