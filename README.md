@@ -1,5 +1,37 @@
 # Hustar_ML_contest
 ## 구성원 : 강나현, 권헌진, 김민호, 오승환
+### 6.07(화)
+- custom model 학습 종료 (public accuracy 0.968299)
+> - 단일 모델로써는 비약적인 성능 향상
+> - 다만 학습 종료때까지 val loss가 꾸준히 감소
+>   - underfitting의 우려가 있음
+> - custom model을 추가하여 Hard Voting (public accuracy 0.975255)
+
+### 6.06(월)
+- custom model 구현 성공 (학습중)
+> - classifier의 parameter를 늘림
+> - data는 민호의 랜덤샘플 30만개(이전 무작위 데이터 수량 감소), epoch=3
+- 추가 제출 (public accuracy 0.973826)
+> - 지금까지 만든 모델 중 acc 0.95 이상인 모델들을 Hard Voting
+> - 총 5개의 모델이 Ensemble됨. 성능 향상이 극적이었음.
+>   - 앞으로 만들어질 모든 모델들의 Ensemble도 기대됨
+
+### 6.05(일)
+- 추가 제출 (public accuracy 0.958764)
+> - 신규 데이터는 각 문제별 1000개의 무작위 negative pair, positive pair를 구성
+>   - 총 train 60만, test 6만
+- 신규 데이터로 학습했더니 약간의 성능 상승이 있었음
+> - 기존 데이터는 약 500만개라 토크나이징에 너무 큰 시간이 소요됨
+> - 또, 기존 데이터는 BM25기반 유사도 측정으로 생성된 데이터
+> - 그러나 Source code에서 BoW와 TF-IDF 기반 유사도 측정은 의미가 적다 판단됨
+>   - 학습 시간 단축 및 모델 성능 향상
+
+### 6.02(목)
+- 추가 제출 (public accuracy 0.954498)
+> - 기존 데이터에 left truncation 추가
+> - 코드 앞부분은 주로 외부 라이브러리의 import 부분이라 크게 의미가 없음
+> - 따라서 truncation이 left가 되었을 때 성능이 약간 상승
+
 ### 6.01(수)
 - 추가 제출 (public accuracy 0.929512)
 > - 다른 조건은 26일 제출과 같음. 모델만 codeberta small을 사용
