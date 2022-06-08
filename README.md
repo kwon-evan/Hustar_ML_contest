@@ -29,8 +29,13 @@
 ### 6.02(목)
 - 추가 제출 (public accuracy 0.954498)
 > - 기존 데이터에 left truncation 추가
-> - 코드 앞부분은 주로 외부 라이브러리의 import 부분이라 크게 의미가 없음
-> - 따라서 truncation이 left가 되었을 때 성능이 약간 상승
+>   - 코드 앞부분은 주로 외부 라이브러리의 import 부분이라 크게 의미가 없음
+>   - 따라서 truncation이 left가 되었을 때 성능이 약간 상승
+> - 또한 trainer의 gradient_accumulation라는 parameter를 발견
+>   - 해당 parameter는 GPU의 resource가 부족하더라도 잠시 학습결과를 저장했다가 합치는 기능을 제공
+>   - 즉, 한꺼번에 batch에 다 못올리더라도 나눠 학습하여 batch를 크게 설정한 듯한 효과를 보여줌
+>   - batch=4, gradient_accumulation=8, parallel=2로 총 batch size가 64인 것 처럼 학습시킴
+>   - 이 또한 성능 향상에 유효했을 것으로 생각됨
 
 ### 6.01(수)
 - 추가 제출 (public accuracy 0.929512)
