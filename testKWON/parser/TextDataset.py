@@ -16,7 +16,7 @@ from torch.utils.data import DataLoader, Dataset, SequentialSampler, RandomSampl
 from torch.utils.data.distributed import DistributedSampler
 from transformers import (WEIGHTS_NAME, AdamW, get_linear_schedule_with_warmup,
                           RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer)
-from tqdm import tqdm, trange
+from tqdm.auto import tqdm, trange
 import multiprocessing
 
 from . import (tree_to_token_index,
@@ -163,7 +163,12 @@ class TextDataset(Dataset):
             data.append((code1, code2, label, tokenizer, parser, code_length, data_flow_length, cache))
 
         # convert example to input features
-        self.examples = [convert_examples_to_features(x) for x in tqdm(data, total=len(data))]
+        self.examples = [convert_examples_to_features(x) for x in tqdm(data,
+                                                                       total=len(data),
+                                                                       position=0,
+                                                                       leave=True,
+                                                                       desc="csv->dataset"
+                                                                      )]
 
     def __len__(self):
         return len(self.examples)
