@@ -12,9 +12,9 @@
 
 ### 6.08(수)
 - trainer사용 모델 학습 종료 (public accuracy 0.9732517158)
-- 5 folds 3 epochs 후 보팅하는 모델이지만 시간 제약으로 1 folds만 수행
-- 단일 모델로는 최고점
-> - 아마 1 folds라도 3 epochs 끝까지 수행했기때문이 아닐까  
+> - 5 folds 3 epochs 후 보팅하는 모델이지만 시간 제약으로 1 folds만 수행
+> - 단일 모델로는 최고점
+>   - 아마 1 folds라도 3 epochs 끝까지 수행했기때문이 아닐까  
 
 ### 6.07(화)
 - custom model 학습 종료 (public accuracy 0.968299)
