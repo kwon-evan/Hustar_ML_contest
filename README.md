@@ -1,5 +1,20 @@
 # Hustar_ML_contest
 ## 구성원 : 강나현, 권헌진, 김민호, 오승환
+### 6.09(목)
+- trainer를 사용하지 않고 wandb에 잘못 분류하는 code pair 기록하는 모델 + 5 folds 1 epoch voting (public accuracy 0.9784455574)
+- 시간 제한으로 wandb에 기록한 잘못 분류한 code pair를 분석하여 활용하지 못함.
+- 시간 제한으로 폴드마다 1 epoch만 수행
+> - 5 folds를 모두 수행하여 저장한 5개의 모델로 보팅해보는 것이 더 중요하다고 생각해서 epoch는 한번만 수행함
+- 보팅 결과 최고점 달성
+- 하드보팅보다 소프트보팅이 점수 좋음
+- 어제 제출한 단일 모델 체크포인트를 불러와 inference 및 보팅을 재수행하여 점수 소폭 상승 (public accuracy 0.9795028752) 순위 변동은 없음 
+
+### 6.08(수)
+- trainer사용 모델 학습 종료 (public accuracy 0.9732517158)
+- 5 folds 3 epochs 후 보팅하는 모델이지만 시간 제약으로 1 folds만 수행
+- 단일 모델로는 최고점
+> - 아마 1 folds라도 3 epochs 끝까지 수행했기때문이 아닐까  
+
 ### 6.07(화)
 - custom model 학습 종료 (public accuracy 0.968299)
 > - 단일 모델로써는 비약적인 성능 향상
