@@ -4,7 +4,6 @@
 
 # for here
 dev/
-data/cityscapes/
 data/VOC2012/
 events/
 log/
