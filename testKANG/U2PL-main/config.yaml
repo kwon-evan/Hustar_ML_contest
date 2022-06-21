@@ -1,18 +1,8 @@
 dataset: # Required.
   type: cityscapes_semi
-  train:
-    data_root: ./data/cityscapes
-    data_list: ./data/splits/cityscapes/744/labeled.txt
-    flip: True
-    GaussianBlur: False
-    rand_resize: [0.5, 2.0]
-    #rand_rotation: [-10.0, 10.0]
-    crop:
-      type: rand
-      size: [769, 769] # crop image with HxW size
   val:
-    data_root: ./data/cityscapes
-    data_list: ./data/splits/test.txt
+    data_root: /home/piai/다운로드/U2PL-main/data/cityscapes
+    data_list: /home/piai/다운로드/U2PL-main/data/splits/test.txt
     crop:
       type: center
       size: [769, 769] # crop image with HxW size

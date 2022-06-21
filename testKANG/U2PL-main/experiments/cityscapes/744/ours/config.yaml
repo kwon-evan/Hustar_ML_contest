@@ -31,7 +31,7 @@ trainer: # Required.
   optimizer:
     type: SGD
     kwargs:
-      lr: 0.001  # 8GPUs
+      lr: 0.001 # 8GPUs
       momentum: 0.9
       weight_decay: 0.0005
   lr_scheduler:

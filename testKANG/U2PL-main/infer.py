@@ -4,6 +4,7 @@ import time
 from argparse import ArgumentParser
 
 import numpy as np
+import pandas as pd
 import torch
 import torch.nn.functional as F
 import torch.nn.parallel
@@ -30,7 +31,7 @@ def get_parser():
     parser.add_argument(
         "--model_path",
         type=str,
-        default="checkpoints/psp_best.pth",
+        default="experiments/cityscapes/744/ours/checkpoints/ckpt.pth",
         help="evaluation model path",
     )
     parser.add_argument(
@@ -52,7 +53,7 @@ def get_logger():
 
 def main():
     global args, logger, cfg
-    args = get_parser().parse_args()
+    args, unknown = get_parser().parse_known_args()
     cfg = yaml.load(open(args.config, "r"), Loader=yaml.Loader)
     logger = get_logger()
     logger.info(args)
@@ -102,6 +103,12 @@ def main():
     input_scale = [769, 769] if "cityscapes" in data_root else [513, 513]
     colormap = create_pascal_label_colormap()
 
+    class_map = {0: 4, 1: 1, 2: 2, 3: 3}
+    class_label = {1: 'container_truck', 2: 'forklift', 3: 'reach_stacker', 4: 'ship'}
+    file_names = []
+    classes = []
+    predictions = []
+
     model.eval()
     for image_path, label_path in tqdm(data_list):
         image_name = image_path.split("/")[-1]
@@ -117,13 +124,41 @@ def main():
         output = net_process(model, image)
         output = F.interpolate(output, (h, w), mode="bilinear", align_corners=True)
         mask = torch.argmax(output, dim=1).squeeze().cpu().numpy()
+        class_num = output[0].sum(dim=(1, 2))[1:].argmax().item()
+        print(class_num)
+        class_of_image = class_map[class_num]
+        class_mask = (output[0][class_num + 1] - output[0][0] > 0).int().cpu().numpy()
+        coverted_coordinate = mask_to_coordinates(class_mask)
+
+        file_names.append(image_name)
+        classes.append(class_of_image)
+        predictions.append(coverted_coordinate)
 
         color_mask = Image.fromarray(colorful(mask, colormap))
         color_mask.save(os.path.join(color_folder, image_name))
 
-        mask = Image.fromarray(mask)
-        mask.save(os.path.join(gray_folder, image_name))
+    sample_submission = pd.read_csv('/home/piai/다운로드/U2PL-main/sample_submission.csv')
+    submission_df = pd.DataFrame({'file_name': file_names, 'class': classes, 'prediction': predictions})
+    submission_df = pd.merge(sample_submission['file_name'], submission_df, left_on='file_name',
+                             right_on='file_name', how='left')
+    submission_df.to_csv('/home/piai/다운로드/U2PL-main/submission_df.csv', index=False, encoding='utf-8')
 
+def mask_to_coordinates(mask):
+    flatten_mask = mask.flatten()
+    if flatten_mask.max() == 0:
+        return f'0 {len(flatten_mask)}'
+    idx = np.where(flatten_mask!=0)[0]
+    steps = idx[1:]-idx[:-1]
+    new_coord = []
+    step_idx = np.where(np.array(steps)!=1)[0]
+    start = np.append(idx[0], idx[step_idx+1])
+    end = np.append(idx[step_idx], idx[-1])
+    length = end - start + 1
+    for i in range(len(start)):
+        new_coord.append(start[i])
+        new_coord.append(length[i])
+    new_coord_str = ' '.join(map(str, new_coord))
+    return new_coord_str
 
 def colorful(mask, colormap):
     color_mask = np.zeros([mask.shape[0], mask.shape[1], 3])
@@ -140,11 +175,10 @@ def create_pascal_label_colormap():
     """
     colormap = 255 * np.ones((256, 3), dtype=np.uint8)
     colormap[0] = [0, 0, 0]
-    colormap[1] = [128, 0, 0]
-    colormap[2] = [0, 128, 0]
-    colormap[3] = [128, 128, 0]
-    colormap[4] = [0, 0, 128]
-
+    colormap[1] = [128, 0, 0] # 빨 container_truck
+    colormap[2] = [0, 128, 0] # 녹 forklift
+    colormap[3] = [128, 128, 0] # 노 reach_stacker
+    colormap[4] = [0, 0, 128] # 파 ship
     return colormap
 
 
