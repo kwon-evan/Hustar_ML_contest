@@ -1,0 +1,10 @@
+DIRECTORY:
+  sample_submission: './submission/' #개발 경로에 맞게 수정하세요!
+
+TRAIN:
+  train_serial: '20220615_193142'
+
+PREDICT:
+  seed: 42
+  gpu: 0, 1
+  batch_size: 1
